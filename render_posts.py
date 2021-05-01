@@ -38,7 +38,8 @@ def render_comment(comment, ident):
     return content
 
 
-def render_post(post):
+def render_post(post, data):
+    print(post)
     dt = timestamp_to_moskow_datetime(post['date'])
     dt_fname = dt.strftime('%Y-%m-%d %H-%M')
     title = ' '.join(post['text'].split()[:5])
@@ -54,12 +55,12 @@ def render_post(post):
             "Comments: %i" % post['comments']['count'],
             "Reposts: %i" % post['reposts']['count'],
             "Views: %i" % post['views']['count'],
-            "Original URL: https://vk.com/wall-%i_%i" % post['id']['count'],
+            "Original URL: https://vk.com/wall-%i_%i" % (-post['owner_id'], post['id']),
         ]
     )
     content += "\n\n"
 
-    for att in post['comments']['attachments']:
+    for att in post.get('attachments', []):
         content += "%s\n\n" % att['rendered']
 
     comments = post['comments'].get('items')

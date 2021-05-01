@@ -57,12 +57,13 @@ def get_all_posts(community):
 def ensure_attachment(community, attachment):
     if attachment['type'] == 'photo':
         fname = 'attachments/%i.jpg' % attachment['photo']['id']
+        full_fname = dir + fname
 
-        if not os.path.isfile(community + '/' + fname):
+        if not os.path.isfile(full_fname):
             r = requests.get(
                 max(attachment['photo']['sizes'], key=lambda s: s['height'])['url']
             )
-            with open(community + '/' + fname, 'wb') as f:
+            with open(full_fname, 'wb') as f:
                 f.write(r.content)
 
         attachment['rendered'] = "![%s](%s)" % (attachment['photo']['text'], fname)
@@ -86,25 +87,32 @@ if __name__ == '__main__':
     assert community.startswith("https://vk.com/")
     community = community.replace("https://vk.com/", "")
 
+    dir = "backups/%s/" % community
+
     try:
-        os.mkdir(community)
+        os.mkdir('backups')
     except FileExistsError:
         pass
 
     try:
-        os.mkdir(community + "/attachments/")
+        os.mkdir(dir)
     except FileExistsError:
         pass
 
-    posts = get_all_posts(community)
+    try:
+        os.mkdir(dir + "attachments/")
+    except FileExistsError:
+        pass
 
-    # with open('%s/%s.posts.json' % (community, community), 'r') as f:
-    #     posts = json.load(f)
+    post_data = get_all_posts(community)
 
-    with open('%s/%s.json' % (community, community), 'w') as f:
-        json.dump(posts, f, indent=4)
+    # with open('%s/%s.json' % (dir, community), 'r') as f:
+    #     post_data = json.load(f)
 
-    for p in posts:
-        fname, content = render_posts.render_post(p)
-        with open('%s/%s' % (community, fname), 'w') as f:
+    with open('%s/%s.json' % (dir, community), 'w') as f:
+        json.dump(post_data, f, indent=4)
+
+    for p in post_data['items']:
+        fname, content = render_posts.render_post(p, post_data)
+        with open('%s/%s' % (dir, fname), 'w') as f:
             f.write(content)
