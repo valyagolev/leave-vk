@@ -17,7 +17,7 @@ def timestamp_to_moskow_datetime(ts):
     return dt.astimezone(local_tz)
 
 
-def render_comment(comment, ident):
+def render_comment(comment, ident, cdata, data):
     ident_whitespace = " " * ident * 4
     ident_next_whitespace = " " * (ident + 1) * 4
 
@@ -32,7 +32,7 @@ def render_comment(comment, ident):
 
     if comment.get('thread') and comment['thread']['items']:
         for reply in comment['thread']['items']:
-            content += render_comment(reply, ident + 1)
+            content += render_comment(reply, ident + 1, cdata, data)
 
     return content
 
@@ -61,9 +61,11 @@ def render_post(post, data):
     )
     content += "\n\n"
 
-    comments = post['comments'].get('items')
+    comments = post['comments'].get('data', {}).get('items')
     if comments:
         content += "\n\n" + "-" * 20 + "\n\n"
-        content += "\n".join(render_comment(c, 0) for c in comments)
+        content += "\n".join(
+            render_comment(c, 0, post['comments']['data'], data) for c in comments
+        )
 
     return fname, content

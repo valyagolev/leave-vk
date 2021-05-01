@@ -78,7 +78,7 @@ def ensure_attachment(community, attachment):
         return
 
     print("Not sure what to do with attachment type=%s" % attachment['type'])
-    attachment['rendered'] = "```\n%s\n```" % json.dumps(attachment, indent=4)
+    attachment['rendered'] = "```\n%s\n```" % json.dumps(attachment)
 
 
 if __name__ == '__main__':
@@ -104,10 +104,10 @@ if __name__ == '__main__':
     except FileExistsError:
         pass
 
-    # post_data = get_all_posts(community)
+    post_data = get_all_posts(community)
 
-    with open('%s/%s.json' % (dir, community), 'r') as f:
-        post_data = json.load(f)
+    # with open('%s/%s.json' % (dir, community), 'r') as f:
+    #     post_data = json.load(f)
 
     with open('%s/%s.json' % (dir, community), 'w') as f:
         json.dump(post_data, f, indent=4)
