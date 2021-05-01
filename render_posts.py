@@ -31,7 +31,6 @@ def render_comment(comment, ident):
     )
 
     if comment.get('thread') and comment['thread']['items']:
-        print("thread")
         for reply in comment['thread']['items']:
             content += render_comment(reply, ident + 1)
 
@@ -39,7 +38,6 @@ def render_comment(comment, ident):
 
 
 def render_post(post, data):
-    print(post)
     dt = timestamp_to_moskow_datetime(post['date'])
     dt_fname = dt.strftime('%Y-%m-%d %H-%M')
     title = ' '.join(post['text'].split()[:5])
@@ -47,6 +45,9 @@ def render_post(post, data):
     fname = '%s %s.txt' % (dt_fname, title)
 
     content = "# %s...\n\n%s\n\n" % (title, post['text'])
+
+    for att in post.get('attachments', []):
+        content += "%s\n\n" % att['rendered']
 
     content += "\n".join(
         [
@@ -59,9 +60,6 @@ def render_post(post, data):
         ]
     )
     content += "\n\n"
-
-    for att in post.get('attachments', []):
-        content += "%s\n\n" % att['rendered']
 
     comments = post['comments'].get('items')
     if comments:

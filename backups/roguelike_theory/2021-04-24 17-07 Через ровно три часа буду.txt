@@ -4,13 +4,6 @@
 
 https://www.youtube.com/watch?v=T7l3zHGNg7s
 
-Date: 2021-04-24 17:07
-Likes: 12
-Comments: 1
-Reposts: 6
-Views: 529
-Original URL: https://vk.com/wall-140963346_555
-
 ```
 {
     "type": "video",
@@ -39,4 +32,11 @@ Original URL: https://vk.com/wall-140963346_555
     }
 }
 ```
+
+Date: 2021-04-24 17:07
+Likes: 12
+Comments: 1
+Reposts: 6
+Views: 529
+Original URL: https://vk.com/wall-140963346_555
 
