@@ -3,57 +3,11 @@
 Саундтреком моего локдауна был этот прошлолетний микс от skyapnea, который, начавшись с самозабвенно-уверенного прочтения Рут Вайт бодлеровского "Сплина" за два захватывающих часа музыки разных степеней электронности, ритмичности и тональности доходит до почему-то мафиозной обработки похоронного марша Шопена. Сам марш – ровно тот, медленно шагая под который за гробом отца, Фанни поворачивается, чтобы улыбнуться рядом бредущему Александру, выговаривающему: "скотство. зараза. проказа. жопа. дерьмо. чёрт. сука. задница. говно. сволочи. уроды. скоты. гады. говночисты. скоты. суки. золотушники. ублюдки. рвань. дрянь."
 
 ```
-{
-    "type": "video",
-    "video": {
-        "access_key": "436377677cebe301c7",
-        "can_comment": 0,
-        "can_like": 1,
-        "can_repost": 1,
-        "can_subscribe": 1,
-        "can_add_to_faves": 1,
-        "can_add": 1,
-        "comments": 0,
-        "date": 1517843004,
-        "description": "",
-        "duration": 84,
-        "photo_130": "https://sun9-76.userapi.com/impf/c841325/v841325395/62f69/oeG0av8JRvk.jpg?size=130x96&quality=96&keep_aspect_ratio=1&background=000000&sign=0222d7dced6fb4406462bf79382fbd20&c_uniq_tag=L6EYM1AkXcpPeIcx_PXtJnbgVSwDNq8bTHgUspo_izU&type=video_thumb",
-        "photo_320": "https://sun9-76.userapi.com/impf/c841325/v841325395/62f69/oeG0av8JRvk.jpg?size=320x240&quality=96&keep_aspect_ratio=1&background=000000&sign=5ccabd8a55a398ae144e0e4b9e503715&c_uniq_tag=t62VmV6ypvxR8s3DL3-R6eWT7XrVLf2S1jFf7Uad6TE&type=video_thumb",
-        "photo_800": "https://sun9-76.userapi.com/impf/c841325/v841325395/62f69/oeG0av8JRvk.jpg?size=800x450&quality=96&keep_aspect_ratio=1&background=000000&sign=db16d5a732dad1290b90c2ccbfe4e244&c_uniq_tag=XMrLG_MlbhK9yyZPguSo6UTM2PPrSvLdL2NM0TtCAzs&type=video_thumb",
-        "first_frame_130": "https://sun9-48.userapi.com/impf/c840222/v840222395/734e4/PHAQG6vNvN4.jpg?size=130x73&quality=96&sign=b293f9ce2acf097ed668a63d06443692&c_uniq_tag=dH-fOLwkSnLSKR4JnItvPLpwKiPerK8s9VP7fMcGquY&type=video_first_frame",
-        "first_frame_160": "https://sun9-48.userapi.com/impf/c840222/v840222395/734e4/PHAQG6vNvN4.jpg?size=160x90&quality=96&sign=320050def5e2656b27ba585f898f9f3b&c_uniq_tag=qi5H1NSAsVBNe2D9sYfsHBsVz8HhMlYFpiOEp9QQT98&type=video_first_frame",
-        "first_frame_320": "https://sun9-48.userapi.com/impf/c840222/v840222395/734e4/PHAQG6vNvN4.jpg?size=320x180&quality=96&sign=1f17535bb6e4135b5b31144da50534d2&c_uniq_tag=Rt53KzLAYq1FnH8HhJBVHXXDL-yFuFziFrwtQZEK3HQ&type=video_first_frame",
-        "first_frame_800": "https://sun9-48.userapi.com/impf/c840222/v840222395/734e4/PHAQG6vNvN4.jpg?size=800x450&quality=96&sign=7476db68e82f8e406960ac649460ea4f&c_uniq_tag=s-PCHF_AkDkA0owrv9FpFotffgsNNYQvp3320q-IJag&type=video_first_frame",
-        "width": 854,
-        "height": 480,
-        "id": 456239064,
-        "owner_id": 1042307,
-        "title": "fa",
-        "track_code": "video_4be39361eg61w-aR-Tk75Z95zBDcsGfNrgWx4H4g751DyhpvFg5LLLDFjZb6PQy6q0z6Iu-JV_uaAcY",
-        "views": 1377
-    }
-}
+{"type": "video", "video": {"access_key": "436377677cebe301c7", "can_comment": 0, "can_like": 1, "can_repost": 1, "can_subscribe": 1, "can_add_to_faves": 1, "can_add": 1, "comments": 0, "date": 1517843004, "description": "", "duration": 84, "photo_130": "https://sun9-76.userapi.com/impf/c841325/v841325395/62f69/oeG0av8JRvk.jpg?size=130x96&quality=96&keep_aspect_ratio=1&background=000000&sign=0222d7dced6fb4406462bf79382fbd20&c_uniq_tag=L6EYM1AkXcpPeIcx_PXtJnbgVSwDNq8bTHgUspo_izU&type=video_thumb", "photo_320": "https://sun9-76.userapi.com/impf/c841325/v841325395/62f69/oeG0av8JRvk.jpg?size=320x240&quality=96&keep_aspect_ratio=1&background=000000&sign=5ccabd8a55a398ae144e0e4b9e503715&c_uniq_tag=t62VmV6ypvxR8s3DL3-R6eWT7XrVLf2S1jFf7Uad6TE&type=video_thumb", "photo_800": "https://sun9-76.userapi.com/impf/c841325/v841325395/62f69/oeG0av8JRvk.jpg?size=800x450&quality=96&keep_aspect_ratio=1&background=000000&sign=db16d5a732dad1290b90c2ccbfe4e244&c_uniq_tag=XMrLG_MlbhK9yyZPguSo6UTM2PPrSvLdL2NM0TtCAzs&type=video_thumb", "first_frame_130": "https://sun9-48.userapi.com/impf/c840222/v840222395/734e4/PHAQG6vNvN4.jpg?size=130x73&quality=96&sign=b293f9ce2acf097ed668a63d06443692&c_uniq_tag=dH-fOLwkSnLSKR4JnItvPLpwKiPerK8s9VP7fMcGquY&type=video_first_frame", "first_frame_160": "https://sun9-48.userapi.com/impf/c840222/v840222395/734e4/PHAQG6vNvN4.jpg?size=160x90&quality=96&sign=320050def5e2656b27ba585f898f9f3b&c_uniq_tag=qi5H1NSAsVBNe2D9sYfsHBsVz8HhMlYFpiOEp9QQT98&type=video_first_frame", "first_frame_320": "https://sun9-48.userapi.com/impf/c840222/v840222395/734e4/PHAQG6vNvN4.jpg?size=320x180&quality=96&sign=1f17535bb6e4135b5b31144da50534d2&c_uniq_tag=Rt53KzLAYq1FnH8HhJBVHXXDL-yFuFziFrwtQZEK3HQ&type=video_first_frame", "first_frame_800": "https://sun9-48.userapi.com/impf/c840222/v840222395/734e4/PHAQG6vNvN4.jpg?size=800x450&quality=96&sign=7476db68e82f8e406960ac649460ea4f&c_uniq_tag=s-PCHF_AkDkA0owrv9FpFotffgsNNYQvp3320q-IJag&type=video_first_frame", "width": 854, "height": 480, "id": 456239064, "owner_id": 1042307, "title": "fa", "track_code": "video_030e4fcdxvHu-zQHXfs4_UwZf4ZfBym09O35_kO-Z8rtwA_UMmv30-v9XwBe_w-ieCxJtGw-GYLA6Y4", "views": 1377}}
 ```
 
 ```
-{
-    "type": "audio",
-    "audio": {
-        "artist": "SKYAPNEA",
-        "id": 456244554,
-        "owner_id": 2000228678,
-        "title": "NTS - 15.06.2020",
-        "duration": 25,
-        "is_explicit": false,
-        "url": "https://vk.com/mp3/audio_api_unavailable.mp3",
-        "date": 1615515162,
-        "genre_id": 18,
-        "is_hq": false,
-        "short_videos_allowed": false,
-        "stories_allowed": false,
-        "stories_cover_allowed": false
-    }
-}
+{"type": "audio", "audio": {"artist": "SKYAPNEA", "id": 456244554, "owner_id": 2000228678, "title": "NTS - 15.06.2020", "duration": 25, "is_explicit": false, "url": "https://vk.com/mp3/audio_api_unavailable.mp3", "date": 1615515162, "genre_id": 18, "is_hq": false, "short_videos_allowed": false, "stories_allowed": false, "stories_cover_allowed": false}}
 ```
 
 Date: 2021-03-12 05:12

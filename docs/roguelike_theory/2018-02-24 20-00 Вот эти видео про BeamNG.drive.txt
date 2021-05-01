@@ -9,30 +9,7 @@
 https://www.youtube.com/watch?v=rRFbgmHTniA
 
 ```
-{
-    "type": "video",
-    "video": {
-        "access_key": "30032525b207d60b3b",
-        "can_comment": 0,
-        "can_like": 0,
-        "can_repost": 0,
-        "can_subscribe": 0,
-        "can_add_to_faves": 0,
-        "can_add": 0,
-        "date": 1519491628,
-        "description": "Nick Robinson and Griffin McElroy dip their toes into BeamNG.drive, a hyperrealistic car destruction simulator, and get a lot more than they bargained for.\nSubscribe: https://goo.gl/qw3Ac7\n\nCheck out our full video catalog: https://goo.gl/Cqt2cn\nVisit our playlists: https://goo.gl/pM7TNe\nLike Polygon on Facebook: https://goo.gl/GmkOs4\nFollow Polygon on Twitter: https://goo.gl/cQfqrq\nRead more at: http://www.polygon.com",
-        "duration": 613,
-        "photo_130": "https://sun9-47.userapi.com/c630621/u33520388/video/s_425d9ea4.jpg",
-        "photo_320": "https://sun9-31.userapi.com/c630621/u33520388/video/l_570377f8.jpg",
-        "photo_640": "https://sun9-29.userapi.com/c630621/u33520388/video/y_65585272.jpg",
-        "id": 456239021,
-        "owner_id": -140963346,
-        "title": "Nick and Griffin Play BeamNG.drive \u2014 CAR BOYS, Episode 1",
-        "track_code": "video_8ac2132e7g5ap63UDxLMJf_HlMUMDz-n19M5GuRX8336Y4PsA7_cI0GlqtAAe84k_vHL8Tk5DZTu4wsr4CA",
-        "views": 105,
-        "platform": "YouTube"
-    }
-}
+{"type": "video", "video": {"access_key": "30032525b207d60b3b", "can_comment": 0, "can_like": 0, "can_repost": 0, "can_subscribe": 0, "can_add_to_faves": 0, "can_add": 0, "date": 1519491628, "description": "Nick Robinson and Griffin McElroy dip their toes into BeamNG.drive, a hyperrealistic car destruction simulator, and get a lot more than they bargained for.\nSubscribe: https://goo.gl/qw3Ac7\n\nCheck out our full video catalog: https://goo.gl/Cqt2cn\nVisit our playlists: https://goo.gl/pM7TNe\nLike Polygon on Facebook: https://goo.gl/GmkOs4\nFollow Polygon on Twitter: https://goo.gl/cQfqrq\nRead more at: http://www.polygon.com", "duration": 613, "photo_130": "https://sun9-47.userapi.com/c630621/u33520388/video/s_425d9ea4.jpg", "photo_320": "https://sun9-31.userapi.com/c630621/u33520388/video/l_570377f8.jpg", "photo_640": "https://sun9-29.userapi.com/c630621/u33520388/video/y_65585272.jpg", "id": 456239021, "owner_id": -140963346, "title": "Nick and Griffin Play BeamNG.drive \u2014 CAR BOYS, Episode 1", "track_code": "video_af63ea4bvllDgratY3m1JAGuwYkhUVF5El8yNVNJLANEoTkwfDCMdFiAsalsELclAJievRRnY0orbwAEVz4", "views": 105, "platform": "YouTube"}}
 ```
 
 Date: 2018-02-24 20:00

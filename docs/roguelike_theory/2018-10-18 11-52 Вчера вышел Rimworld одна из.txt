@@ -9,32 +9,7 @@
 Rimworld так важен для меня потому, что представляет приключения совершенно противоположным образом по отношению к капиталистической логике товара. Приключение невозможно просто купить, как обещают турфирмы – можно купить лишь его образ, скажем, фильм о нем или набор кат-сценок, или возможности для изображения его в инстаграме. Но приключение появляется из заботы, а забота это уже что-то сложнее потребления. Rimworld продает возможность построить поселение – приключения остаются, как и должны, нашей заботой.
 
 ```
-{
-    "type": "video",
-    "video": {
-        "access_key": "491b822ffc637a6582",
-        "can_comment": 0,
-        "can_like": 1,
-        "can_repost": 1,
-        "can_subscribe": 1,
-        "can_add_to_faves": 1,
-        "can_add": 1,
-        "comments": 0,
-        "date": 1539817947,
-        "description": "Buy DRM-free (with Steam key): http://rimworldgame.com, Buy on Steam: http://store.steampowered.com/app/294100/",
-        "duration": 134,
-        "photo_130": "https://sun9-19.userapi.com/c844216/v844216817/1118d2/P80GuXcDQaQ.jpg",
-        "photo_320": "https://sun9-9.userapi.com/c844216/v844216817/1118d4/GvSbMnM0ZHE.jpg",
-        "photo_800": "https://sun9-21.userapi.com/c844216/v844216817/1118d5/ddVvgt_kO8A.jpg",
-        "id": 456239024,
-        "owner_id": -140963346,
-        "title": "RimWorld Launch Trailer",
-        "track_code": "video_f8bca540w0odlqkpkAbOP-ZrvEtR9zch_E2u3PF_zBNaJijY6v_xZwaUri2fb885613jf2TBBRLFfZzo9Qg",
-        "views": 118,
-        "local_views": 118,
-        "platform": "YouTube"
-    }
-}
+{"type": "video", "video": {"access_key": "491b822ffc637a6582", "can_comment": 0, "can_like": 1, "can_repost": 1, "can_subscribe": 1, "can_add_to_faves": 1, "can_add": 1, "comments": 0, "date": 1539817947, "description": "Buy DRM-free (with Steam key): http://rimworldgame.com, Buy on Steam: http://store.steampowered.com/app/294100/", "duration": 134, "photo_130": "https://sun9-19.userapi.com/c844216/v844216817/1118d2/P80GuXcDQaQ.jpg", "photo_320": "https://sun9-9.userapi.com/c844216/v844216817/1118d4/GvSbMnM0ZHE.jpg", "photo_800": "https://sun9-21.userapi.com/c844216/v844216817/1118d5/ddVvgt_kO8A.jpg", "id": 456239024, "owner_id": -140963346, "title": "RimWorld Launch Trailer", "track_code": "video_ee169f17mc_ZYgGKyBDUUTQybB66IFPEQxoevryb3oxDHGoSKCKr4sJgBo7HedVXOQQzKo8WYfd6KiyKuOw", "views": 118, "local_views": 118, "platform": "YouTube"}}
 ```
 
 Date: 2018-10-18 11:52
