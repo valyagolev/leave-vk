@@ -42,7 +42,7 @@ def render_post(post, data):
     dt_fname = dt.strftime('%Y-%m-%d %H-%M')
     title = ' '.join(post['text'].split()[:5])
     title = re.sub(r'[^ а-яa-z\.]', "", title, flags=re.I)
-    fname = '%s %s.txt' % (dt_fname, title)
+    fname = '%s %s.md' % (dt_fname, title)
 
     content = "# %s...\n\n%s\n\n" % (title, post['text'])
 
