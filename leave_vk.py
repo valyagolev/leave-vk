@@ -87,10 +87,10 @@ if __name__ == '__main__':
     assert community.startswith("https://vk.com/")
     community = community.replace("https://vk.com/", "")
 
-    dir = "backups/%s/" % community
+    dir = "docs/%s/" % community
 
     try:
-        os.mkdir('backups')
+        os.mkdir('docs')
     except FileExistsError:
         pass
 
