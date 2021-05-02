@@ -21,20 +21,28 @@ def render_comment(comment, ident, cdata, data):
     ident_whitespace = " " * ident * 4
     ident_next_whitespace = " " * (ident + 1) * 4
 
-    try:
-        author = cdata['profiles'][str(comment['from_id'])]
-        name = author['first_name'] + ' ' + author['last_name']
-    except KeyError:
-        name = comment['from_id']
+    if not comment.get('deleted'):
+        try:
+            author = cdata['profiles'][str(comment['from_id'])]
+            name = author['first_name'] + ' ' + author['last_name']
+        except KeyError:
+            name = comment['from_id']
 
-    content = "%s  * %s\n%sAuthor: %s, Date: %s, Likes: %i\n\n" % (
-        ident_whitespace,
-        comment['text'].replace("\n", "\n" + ident_next_whitespace),
-        ident_next_whitespace,
-        name,
-        timestamp_to_moskow_datetime(comment['date']).strftime('%Y-%m-%d %H:%M'),
-        0,
-    )
+        content = "%s  * %s\n%sAuthor: %s, Date: %s, Likes: %i\n\n" % (
+            ident_whitespace,
+            comment['text'].replace("\n", "\n" + ident_next_whitespace),
+            ident_next_whitespace,
+            name,
+            timestamp_to_moskow_datetime(comment['date']).strftime('%Y-%m-%d %H:%M'),
+            comment['likes']['count'],
+        )
+    else:
+        content = "%s  * %s\n%sAuthor: ?, Date: %s, Likes: ?\n\n" % (
+            ident_whitespace,
+            "(deleted comment)",
+            ident_next_whitespace,
+            timestamp_to_moskow_datetime(comment['date']).strftime('%Y-%m-%d %H:%M'),
+        )
 
     if comment.get('thread') and comment['thread']['items']:
         for reply in comment['thread']['items']:
@@ -62,9 +70,10 @@ def render_post(post, data):
             "Likes: %i" % post['likes']['count'],
             "Comments: %i" % post['comments']['count'],
             "Reposts: %i" % post['reposts']['count'],
-            "Views: %i" % post['views']['count'],
+            "Views: %i" % post['views']['count'] if 'views' in post else None,
             "Original URL: https://vk.com/wall-%i_%i" % (-post['owner_id'], post['id']),
         ]
+        if s
     )
     content += "\n\n"
 

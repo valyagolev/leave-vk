@@ -104,10 +104,10 @@ if __name__ == '__main__':
     except FileExistsError:
         pass
 
-    post_data = get_all_posts(community)
+    # post_data = get_all_posts(community)
 
-    # with open('%s/%s.json' % (dir, community), 'r') as f:
-    #     post_data = json.load(f)
+    with open('%s/%s.json' % (dir, community), 'r') as f:
+        post_data = json.load(f)
 
     with open('%s/%s.json' % (dir, community), 'w') as f:
         json.dump(post_data, f, indent=4)
