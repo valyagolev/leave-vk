@@ -10,17 +10,17 @@ Dwarf Fortress пишут два брата так: они придумываю�
 
 ![Original: http://s15.postimg.org/c8m447sd7/Dwarf_cat.png](attachments/456239029.jpg)
 
-Date: 2017-03-23 00:20
-Likes: 108
-Comments: 1
-Reposts: 12
-Views: 3427
-Original URL: https://vk.com/wall-140963346_10
+    Date: 2017-03-23 00:20
+    Likes: 108
+    Comments: 1
+    Reposts: 12
+    Views: 3427
+    Original URL: https://vk.com/wall-140963346_10
 
 
 
 --------------------
 
   * Боже мой, как прекрасно
-    Author: 354122912, Date: 2017-04-01 06:53, Likes: 0*
+    Author: Neuro Askesis, Date: 2017-04-01 06:53, Likes: 0
 

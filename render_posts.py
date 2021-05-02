@@ -21,11 +21,17 @@ def render_comment(comment, ident, cdata, data):
     ident_whitespace = " " * ident * 4
     ident_next_whitespace = " " * (ident + 1) * 4
 
-    content = "%s  * %s\n%sAuthor: %s, Date: %s, Likes: %i*\n\n" % (
+    try:
+        author = cdata['profiles'][str(comment['from_id'])]
+        name = author['first_name'] + ' ' + author['last_name']
+    except KeyError:
+        name = comment['from_id']
+
+    content = "%s  * %s\n%sAuthor: %s, Date: %s, Likes: %i\n\n" % (
         ident_whitespace,
         comment['text'].replace("\n", "\n" + ident_next_whitespace),
         ident_next_whitespace,
-        comment['from_id'],
+        name,
         timestamp_to_moskow_datetime(comment['date']).strftime('%Y-%m-%d %H:%M'),
         0,
     )
@@ -50,7 +56,8 @@ def render_post(post, data):
         content += "%s\n\n" % att['rendered']
 
     content += "\n".join(
-        [
+        "    " + s
+        for s in [
             "Date: %s" % dt.strftime('%Y-%m-%d %H:%M'),
             "Likes: %i" % post['likes']['count'],
             "Comments: %i" % post['comments']['count'],

@@ -10,10 +10,10 @@
 
 [SimCities and SimCrises](http://molleindustria.org/GamesForCities/)
 
-Date: 2018-04-28 14:38
-Likes: 39
-Comments: 0
-Reposts: 4
-Views: 2813
-Original URL: https://vk.com/wall-140963346_153
+    Date: 2018-04-28 14:38
+    Likes: 39
+    Comments: 0
+    Reposts: 4
+    Views: 2813
+    Original URL: https://vk.com/wall-140963346_153
 

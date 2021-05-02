@@ -4,10 +4,10 @@ the struggle is real. я надеюсь это все закончится не 
 
 ![](attachments/456239071.jpg)
 
-Date: 2018-06-29 16:13
-Likes: 10
-Comments: 0
-Reposts: 0
-Views: 1995
-Original URL: https://vk.com/wall-140963346_210
+    Date: 2018-06-29 16:13
+    Likes: 10
+    Comments: 0
+    Reposts: 0
+    Views: 1995
+    Original URL: https://vk.com/wall-140963346_210
 
