@@ -7,6 +7,9 @@ import vk_api
 
 import render_posts
 
+vk_session = vk_api.VkApi(token=os.environ['TOKEN'])
+vk = vk_session.get_api()
+
 
 def get_paginated(community, method, **kwargs):
     data = {'profiles': [], 'groups': [], 'items': []}
@@ -31,10 +34,31 @@ def get_paginated(community, method, **kwargs):
     return data
 
 
-def get_all_posts(community):
-    vk_session = vk_api.VkApi(token=os.environ['TOKEN'])
+def download_album(community, owner_id, album_id):
+    # photos = get_paginated(
+    #                 community,
+    #                 ,
+    #                 ownder_id=attachment['album']['owner_id'],
+    #                 )
+    data = {'items': []}
 
-    vk = vk_session.get_api()
+    while True:
+        print('album offset', len(data['items']))
+        more = vk.photos.get(
+            count=50, offset=len(data['items']), owner_id=owner_id, album_id=album_id
+        )
+
+        if not more['items']:
+            break
+
+        for i in more['items']:
+            t, p = ensure_photo(i)
+            data['items'].append((t, p))
+
+    return data['items']
+
+
+def get_all_posts(community):
 
     posts_data = get_paginated(community, vk.wall.get, extended=1, domain=community)
 
@@ -54,19 +78,22 @@ def get_all_posts(community):
     return posts_data
 
 
+def ensure_photo(photo):
+    fname = 'attachments/%i.jpg' % photo['id']
+    full_fname = dir + fname
+
+    if not os.path.isfile(full_fname):
+        r = requests.get(max(photo['sizes'], key=lambda s: s['height'])['url'])
+        with open(full_fname, 'wb') as f:
+            f.write(r.content)
+
+    return (photo['text'], fname)
+
+
 def ensure_attachment(community, attachment):
     if attachment['type'] == 'photo':
-        fname = 'attachments/%i.jpg' % attachment['photo']['id']
-        full_fname = dir + fname
-
-        if not os.path.isfile(full_fname):
-            r = requests.get(
-                max(attachment['photo']['sizes'], key=lambda s: s['height'])['url']
-            )
-            with open(full_fname, 'wb') as f:
-                f.write(r.content)
-
-        attachment['rendered'] = "![%s](%s)" % (attachment['photo']['text'], fname)
+        text, fname = ensure_photo(attachment['photo'])
+        attachment['rendered'] = "![%s](%s)" % (text, fname)
 
         return
 
@@ -77,7 +104,20 @@ def ensure_attachment(community, attachment):
         )
         return
 
+    if attachment['type'] == 'album':
+        photos = download_album(
+            community,
+            owner_id=attachment['album']['owner_id'],
+            album_id=attachment['album']['id'],
+        )
+        attachment['rendered'] = "Album: %s\n" + "\n".join(
+            "![%s](%s)" % (t, f) for (t, f) in photos
+        )
+        return
+
     print("Not sure what to do with attachment type=%s" % attachment['type'])
+    print(repr(attachment))
+    # assert False
     attachment['rendered'] = "```\n%s\n```" % json.dumps(attachment)
 
 
