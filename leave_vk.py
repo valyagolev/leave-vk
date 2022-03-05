@@ -154,5 +154,5 @@ if __name__ == '__main__':
 
     for p in post_data['items']:
         fname, content = render_posts.render_post(p, post_data)
-        with open('%s/%s' % (dir, fname), 'w') as f:
+        with open('%s/%s' % (dir, fname), 'w', encoding = "utf-32") as f:
             f.write(content)
