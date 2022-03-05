@@ -90,6 +90,18 @@ def ensure_photo(photo):
     return (photo['text'], fname)
 
 
+def ensure_doc(doc):
+    fname = 'attachments/%i.%s' % (doc['id'], doc['ext'])
+    full_fname = dir + fname
+
+    if not os.path.isfile(full_fname):
+        r = requests.get(doc['url'])
+        with open(full_fname, 'wb') as f:
+            f.write(r.content)
+
+    return (doc['title'], fname)
+
+
 def ensure_attachment(community, attachment):
     if attachment['type'] == 'photo':
         text, fname = ensure_photo(attachment['photo'])
@@ -113,6 +125,11 @@ def ensure_attachment(community, attachment):
         attachment['rendered'] = "Album: %s\n" + "\n".join(
             "![%s](%s)" % (t, f) for (t, f) in photos
         )
+        return
+
+    if attachment['type'] == 'doc':
+        t, f = ensure_doc(attachment['doc'])
+        attachment['rendered'] = "Doc: ![%s](%s)" % (t, f)
         return
 
     print("Not sure what to do with attachment type=%s" % attachment['type'])
