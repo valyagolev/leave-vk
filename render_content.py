@@ -1,20 +1,5 @@
-import os
-import sys
-import json
-import datetime
-
-import vk_api
-import pytz
 import re
-import requests
-
-import render_posts
-
-
-def timestamp_to_moskow_datetime(ts):
-    local_tz = pytz.timezone('Europe/Moscow')
-    dt = datetime.datetime.utcfromtimestamp(ts).replace(tzinfo=datetime.timezone.utc)
-    return dt.astimezone(local_tz)
+import utils
 
 
 def render_comment(comment, ident, cdata, data):
@@ -33,7 +18,7 @@ def render_comment(comment, ident, cdata, data):
             comment['text'].replace("\n", "\n" + ident_next_whitespace),
             ident_next_whitespace,
             name,
-            timestamp_to_moskow_datetime(comment['date']).strftime('%Y-%m-%d %H:%M'),
+            utils.timestamp_to_moscow_datetime(comment['date']).strftime('%Y-%m-%d %H:%M'),
             comment['likes']['count'],
         )
     else:
@@ -41,7 +26,7 @@ def render_comment(comment, ident, cdata, data):
             ident_whitespace,
             "(deleted comment)",
             ident_next_whitespace,
-            timestamp_to_moskow_datetime(comment['date']).strftime('%Y-%m-%d %H:%M'),
+            utils.timestamp_to_moscow_datetime(comment['date']).strftime('%Y-%m-%d %H:%M'),
         )
 
     if comment.get('thread') and comment['thread']['items']:
@@ -52,7 +37,7 @@ def render_comment(comment, ident, cdata, data):
 
 
 def render_post(post, data):
-    dt = timestamp_to_moskow_datetime(post['date'])
+    dt = utils.timestamp_to_moscow_datetime(post['date'])
     dt_fname = dt.strftime('%Y-%m-%d %H-%M')
     title = ' '.join(post['text'].split()[:5])
     title = re.sub(r'[^ а-яa-z\.]', "", title, flags=re.I)
