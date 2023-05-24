@@ -5,7 +5,8 @@ import requests
 
 import vk_api
 
-import render_posts
+import render_content
+import utils
 
 vk_session = vk_api.VkApi(token=os.environ['TOKEN'])
 vk = vk_session.get_api()
@@ -34,7 +35,7 @@ def get_paginated(community, method, **kwargs):
     return data
 
 
-def download_album(community, owner_id, album_id):
+def download_album(community, owner_id, album):
     # photos = get_paginated(
     #                 community,
     #                 ,
@@ -45,17 +46,21 @@ def download_album(community, owner_id, album_id):
     while True:
         print('album offset', len(data['items']))
         more = vk.photos.get(
-            count=50, offset=len(data['items']), owner_id=owner_id, album_id=album_id
+            count=50, offset=len(data['items']), owner_id=owner_id, album_id=album['id']
         )
 
         if not more['items']:
             break
 
         for i in more['items']:
-            t, p = ensure_photo(i)
+            t, p = ensure_photo('albums/%s_%s' % (album['id'], album['title']), i)
             data['items'].append((t, p))
 
     return data['items']
+
+
+def get_community_info(community):
+    return vk.groups.getById(group_id=community)
 
 
 def get_all_posts(community):
@@ -78,9 +83,27 @@ def get_all_posts(community):
     return posts_data
 
 
-def ensure_photo(photo):
-    fname = 'attachments/%i.jpg' % photo['id']
-    full_fname = dir + fname
+def get_all_albums(community, community_id):
+    albums_data = get_paginated(community, vk.photos.getAlbums, extended=1, domain=community, owner_id=-community_id)
+
+    for album in albums_data['items']:
+        photos = download_album(
+            community,
+            owner_id=album['owner_id'],
+            album=album,
+        )
+        print('album with ID %s downloaded' % album['id'])
+
+
+def ensure_photo(photoDir, photo):
+    full_dir = '%s/%s' % (dir, photoDir)
+    fname = '%s/%s_%i.jpg' % (photoDir, utils.timestamp_to_moscow_datetime(photo['date']).strftime('%Y-%m-%d %H-%M'), photo['id'])
+    full_fname = '%s/%s' % (dir, fname)
+
+    try:
+        os.mkdir(full_dir)
+    except FileExistsError:
+        pass
 
     if not os.path.isfile(full_fname):
         r = requests.get(max(photo['sizes'], key=lambda s: s['height'])['url'])
@@ -104,7 +127,7 @@ def ensure_doc(doc):
 
 def ensure_attachment(community, attachment):
     if attachment['type'] == 'photo':
-        text, fname = ensure_photo(attachment['photo'])
+        text, fname = ensure_photo('attachments', attachment['photo'])
         attachment['rendered'] = "![%s](%s)" % (text, fname)
 
         return
@@ -120,7 +143,7 @@ def ensure_attachment(community, attachment):
         photos = download_album(
             community,
             owner_id=attachment['album']['owner_id'],
-            album_id=attachment['album']['id'],
+            album=attachment['album'],
         )
         attachment['rendered'] = "Album: %s\n" + "\n".join(
             "![%s](%s)" % (t, f) for (t, f) in photos
@@ -161,15 +184,32 @@ if __name__ == '__main__':
     except FileExistsError:
         pass
 
+    try:
+        os.mkdir(dir + "albums/")
+    except FileExistsError:
+        pass
+
+    community_data = get_community_info(community)
+
+    with open('%s/%s.json' % (dir, community), 'w', encoding = "utf-32") as f:
+        json.dump(community_data, f, indent=4)
+
+    if community_data[0]:
+        community_id = community_data[0]['id']
+        album_data = get_all_albums(community, community_id)
+
+        with open('%s/%s_albums.json' % (dir, community), 'w', encoding = "utf-32") as f:
+            json.dump(album_data, f, indent=4)
+
     post_data = get_all_posts(community)
 
     # with open('%s/%s.json' % (dir, community), 'r') as f:
     #     post_data = json.load(f)
 
-    with open('%s/%s.json' % (dir, community), 'w') as f:
+    with open('%s/%s_wall.json' % (dir, community), 'w') as f:
         json.dump(post_data, f, indent=4)
 
     for p in post_data['items']:
-        fname, content = render_posts.render_post(p, post_data)
+        fname, content = render_content.render_post(p, post_data)
         with open('%s/%s' % (dir, fname), 'w', encoding = "utf-32") as f:
             f.write(content)
