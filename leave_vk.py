@@ -1,6 +1,7 @@
 import os.path
 import sys
 import json
+import re
 import requests
 
 import vk_api
@@ -13,11 +14,13 @@ vk = vk_session.get_api()
 
 
 def get_paginated(community, method, **kwargs):
-    data = {'profiles': [], 'groups': [], 'items': []}
+    data = {'profiles': [], 'groups': [], 'items': [], 'count': 0}
 
     while True:
         print('offset', len(data['items']))
         more = method(count=50, offset=len(data['items']), **kwargs)
+
+        data['count'] = data['count'] + more['count']
 
         if not more['items']:
             break
@@ -27,7 +30,8 @@ def get_paginated(community, method, **kwargs):
                 ensure_attachment(community, att)
 
         for k in data.keys():
-            data[k] += more.get(k, [])
+            if k != 'count':
+                data[k] += more.get(k, [])
 
     data['profiles'] = {p['id']: p for p in data['profiles']}
     data['groups'] = {p['id']: p for p in data['groups']}
@@ -41,10 +45,10 @@ def download_album(community, owner_id, album):
     #                 ,
     #                 ownder_id=attachment['album']['owner_id'],
     #                 )
-    data = {'items': []}
+    data = {'items': [], 'count': 0}
 
     while True:
-        print('album offset', len(data['items']))
+        # print('album offset', len(data['items']))
         more = vk.photos.get(
             count=50, offset=len(data['items']), owner_id=owner_id, album_id=album['id']
         )
@@ -52,11 +56,17 @@ def download_album(community, owner_id, album):
         if not more['items']:
             break
 
+        album_title = re.sub(r'[^\w\-_]', '_', album['title'], flags=re.I)
+
+        if data['count'] == 0:
+            data['count'] = more['count']
+            print('downloading %i photos from album: %s' % (data['count'], album_title))
+
         for i in more['items']:
-            t, p = ensure_photo('albums/%s_%s' % (album['id'], album['title']), i)
+            t, p = ensure_photo('albums/%s_%s' % (album['id'], album_title), i)
             data['items'].append((t, p))
 
-    return data['items']
+    return data
 
 
 def get_community_info(community):
@@ -84,15 +94,29 @@ def get_all_posts(community):
 
 
 def get_all_albums(community, community_id):
-    albums_data = get_paginated(community, vk.photos.getAlbums, extended=1, domain=community, owner_id=-community_id)
+    downloaded_album_count = 0
+    downloaded_photos_count = 0
+    total_photos_count = 0
+    albums_data = get_paginated(community, vk.photos.getAlbums, extended=1, domain=community, owner_id=-community_id, need_system=1)
+
+    if albums_data['count'] > 0:
+        print('starting to download %i albums' % albums_data['count'])
 
     for album in albums_data['items']:
-        photos = download_album(
+        total_photos_count += album['size']
+
+    for album in albums_data['items']:
+        photos, photos_count = download_album(
             community,
             owner_id=album['owner_id'],
             album=album,
-        )
-        print('album with ID %s downloaded' % album['id'])
+        ).values()
+        downloaded_album_count += 1
+        downloaded_photos_count += photos_count
+        print('(%i/%i) album with ID %s downloaded' % (downloaded_album_count, albums_data['count'], album['id']))
+        print('(%i/%i) total community photos downloaded' % (downloaded_photos_count, total_photos_count))
+
+    return albums_data
 
 
 def ensure_photo(photoDir, photo):
@@ -100,10 +124,7 @@ def ensure_photo(photoDir, photo):
     fname = '%s/%s_%i.jpg' % (photoDir, utils.timestamp_to_moscow_datetime(photo['date']).strftime('%Y-%m-%d %H-%M'), photo['id'])
     full_fname = '%s/%s' % (dir, fname)
 
-    try:
-        os.mkdir(full_dir)
-    except FileExistsError:
-        pass
+    utils.create_dir(full_dir)
 
     if not os.path.isfile(full_fname):
         r = requests.get(max(photo['sizes'], key=lambda s: s['height'])['url'])
@@ -115,7 +136,7 @@ def ensure_photo(photoDir, photo):
 
 def ensure_doc(doc):
     fname = 'attachments/%i.%s' % (doc['id'], doc['ext'])
-    full_fname = dir + fname
+    full_fname = '%s/%s' % (dir, fname)
 
     if not os.path.isfile(full_fname):
         r = requests.get(doc['url'])
@@ -140,11 +161,11 @@ def ensure_attachment(community, attachment):
         return
 
     if attachment['type'] == 'album':
-        photos = download_album(
+        photos, photos_count = download_album(
             community,
             owner_id=attachment['album']['owner_id'],
             album=attachment['album'],
-        )
+        ).values()
         attachment['rendered'] = "Album: %s\n" + "\n".join(
             "![%s](%s)" % (t, f) for (t, f) in photos
         )
@@ -165,29 +186,13 @@ if __name__ == '__main__':
     assert len(sys.argv) == 2, sys.argv
     community = sys.argv[-1]
     assert community.startswith("https://vk.com/")
-    community = community.replace("https://vk.com/", "")
+    community = community.replace("https://vk.com/", "").removesuffix('/')
 
-    dir = "docs/%s/" % community
+    dir = "docs/%s" % community
+    print('dir: %s' % dir)
 
-    try:
-        os.mkdir('docs')
-    except FileExistsError:
-        pass
-
-    try:
-        os.mkdir(dir)
-    except FileExistsError:
-        pass
-
-    try:
-        os.mkdir(dir + "attachments/")
-    except FileExistsError:
-        pass
-
-    try:
-        os.mkdir(dir + "albums/")
-    except FileExistsError:
-        pass
+    utils.create_dir(dir + "/attachments")
+    utils.create_dir(dir + "/albums")
 
     community_data = get_community_info(community)
 
